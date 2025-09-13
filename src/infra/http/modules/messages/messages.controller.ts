@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessagesBody } from './dtos/createMessagesBody';
 
@@ -10,7 +10,7 @@ export class MessagesController {
   findAll() {
     return this.messagesService.findAll();
   }
-
+  @UsePipes(ValidationPipe)
   @Post()
   async create(@Body() body: CreateMessagesBody) {
     const { author, content, image } = body;
