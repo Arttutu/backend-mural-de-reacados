@@ -12,7 +12,9 @@ export class MessagesController {
   }
 
   @Post()
-  create(@Body() body: CreateMessagesBody) {
-    return this.messagesService.create(body.author, body.content, body.image);
+  async create(@Body() body: CreateMessagesBody) {
+    const { author, content, image } = body;
+    const message = await this.messagesService.create(author, content, image);
+    return message;
   }
 }
