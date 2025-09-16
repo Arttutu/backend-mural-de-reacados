@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable  } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-
-
 
 @Injectable()
 export class MessagesService {
@@ -20,6 +18,18 @@ export class MessagesService {
   async findAll() {
     return this.prisma.message.findMany({
       orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async deleteOldMessages() {
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+
+    return this.prisma.message.deleteMany({
+      where: {
+        createdAt: {
+          lt: tenMinutesAgo,
+        },
+      },
     });
   }
 }

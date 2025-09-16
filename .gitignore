@@ -12,6 +12,12 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# MongoDB data
+mongo-data/
+
+# Google Cloud credentials
+service-account.json
+
 # OS
 .DS_Store
 
